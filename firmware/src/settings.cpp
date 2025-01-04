@@ -37,6 +37,7 @@ static void build(sets::Builder& b) {
         sets::Group g(b, "Часы");
 
         b.Select(kk::clock_style, "Шрифт", "Нет;Тип 1;Тип 2;Тип 3");
+        if (b.Switch(kk::clock_broken, "Эффект смены")) b.reload();
         b.Color(kk::clock_color, "Цвет");
     }
     {
@@ -133,7 +134,7 @@ LP_TICKER([]() {
         db.init(kk::show_ip, true);
 
         db.init(kk::ntp_host, "pool.ntp.org");
-        db.init(kk::ntp_gmt, 3);
+        db.init(kk::ntp_gmt, 7);
 
         db.init(kk::bright, 100);
         db.init(kk::auto_bright, false);
@@ -147,6 +148,7 @@ LP_TICKER([]() {
         db.init(kk::night_trsh, 50);
 
         db.init(kk::clock_style, 1);
+        db.init(kk::clock_broken, false);
         db.init(kk::clock_color, 0xffffff);
 
         db.init(kk::back_mode, 1);

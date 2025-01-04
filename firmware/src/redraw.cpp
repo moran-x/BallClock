@@ -104,12 +104,23 @@ static void drawClock() {
             matrix.setFont(gfx_font_3x5);
 
             matrix.setCursor(1, 1);
-            if (dt.hour < 10) matrix.print(' ');
-            matrix.print(dt.hour);
+            
+            if (NTP.second()>58 and db[kk::clock_broken]){
+                matrix.print(random(10, 23)); 
+            }
+            else {
+                if (dt.hour < 10) matrix.print(' ');
+                matrix.print(dt.hour);
+            }
 
             matrix.setCursor(11, 1);
-            if (dt.minute < 10) matrix.print(0);
-            matrix.print(dt.minute);
+            if (NTP.second()>58 and db[kk::clock_broken]){
+                matrix.print(random(10, 59)); 
+            }
+            else {
+                if (dt.minute < 10) matrix.print(0);
+                matrix.print(dt.minute);
+            }
 
             dots(9, 9);
             break;
@@ -118,12 +129,22 @@ static void drawClock() {
             matrix.setFont(font_3x5_diag);
 
             matrix.setCursor(1, 1);
-            if (dt.hour < 10) matrix.print(' ');
-            matrix.print(dt.hour);
+            if (NTP.second()>58 and db[kk::clock_broken]){
+                matrix.print(random(10, 23)); 
+            }
+            else {
+                if (dt.hour < 10) matrix.print(' ');
+                matrix.print(dt.hour);
+            }
 
             matrix.setCursor(11, 1);
-            if (dt.minute < 10) matrix.print(0);
-            matrix.print(dt.minute);
+            if (NTP.second()>58 and db[kk::clock_broken]){
+                matrix.print(random(10, 59)); 
+            }
+            else {
+                if (dt.minute < 10) matrix.print(0);
+                matrix.print(dt.minute);
+            }
 
             dots(9, 9);
             break;
@@ -133,15 +154,36 @@ static void drawClock() {
 
             if (dt.hour >= 10) {
                 matrix.setCursor(1, 1);
-                matrix.print(dt.hour / 10);
+                if (NTP.second()>58 and db[kk::clock_broken]){
+                    matrix.print(random(10, 23)/10); 
+                }
+                else {
+                    matrix.print(dt.hour / 10);
+                }
             }
+
             matrix.setCursor(5, 1);
-            matrix.print(dt.hour % 10);
+            if (NTP.second()>58 and db[kk::clock_broken]){
+                matrix.print(random(10, 23) % 10); 
+            }
+            else {
+                matrix.print(dt.hour % 10);
+            }
 
             matrix.setCursor(11, 1);
-            matrix.print(dt.minute / 10);
+            if (NTP.second()>58 and db[kk::clock_broken]){
+                matrix.print(random(10, 59) / 10); 
+            }
+            else {
+                matrix.print(dt.minute / 10);
+            }
             matrix.setCursor(15, 1);
-            matrix.print(dt.minute % 10);
+            if (NTP.second()>58 and db[kk::clock_broken]){
+                matrix.print(random(10, 59 % 10)); 
+            }
+            else {
+                matrix.print(dt.minute % 10);
+            }
 
             dots(9, 10);
             break;
